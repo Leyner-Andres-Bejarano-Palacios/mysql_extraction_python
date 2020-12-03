@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/home/leyner/Documentos/ultracom/tarea\ 58\,\ consultor\ gcp\ proteccion/arquitectura/pythonSeed/Yohan/otherFiles/H1/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+     networks:
+      - app-tier
+
+   db_conne:
+     depends_on:
+       - db
+     image: db_conne
+     networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+    
+volumes:
+    db_data: {}
